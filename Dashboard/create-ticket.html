@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Support Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f5f6fa;
+    }
+    .sidebar {
+      position: fixed;
+      height: 100vh;
+      width: 200px;
+      background-color: #2b6cb0;
+      padding-top: 20px;
+      color: white;
+    }
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .sidebar a {
+      display: block;
+      padding: 15px 20px;
+      color: white;
+      text-decoration: none;
+    }
+    .sidebar a:hover {
+      background-color: #1a4f88;
+    }
+    .content {
+      margin-left: 200px;
+      padding: 30px;
+    }
+    .hidden {
+      display: none;
+    }
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    h1 {
+      color: #2b6cb0;
+    }
+    form input,
+    form textarea,
+    form button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    form button {
+      background-color: #2b6cb0;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    form button:hover {
+      background-color: #1a4f88;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <h2>Dashboard</h2>
+    <a href="#" onclick="showPage('profile')">Profile</a>
+    <a href="#" onclick="showPage('tickets')">Tickets</a>
+    <a href="#" onclick="showPage('generate')">Generate Ticket</a>
+  </div>
+
+  <div class="content">
+    <!-- Profile Page -->
+    <div id="profilePage" class="page">
+      <h1>Profile</h1>
+      <div class="card">
+        <p><strong>Name:</strong> John Doe</p>
+        <p><strong>Email:</strong> john@example.com</p>
+        <p><strong>Phone:</strong> +1234567890</p>
+      </div>
+    </div>
+
+    <!-- Tickets Page -->
+    <div id="ticketsPage" class="page hidden">
+      <h1>Support Tickets</h1>
+      <div class="card">
+        <p><strong>Ticket #001:</strong> Login issue</p>
+        <p>Status: <span style="color: green;">Resolved</span></p>
+      </div>
+      <div class="card">
+        <p><strong>Ticket #002:</strong> Payment not processed</p>
+        <p>Status: <span style="color: orange;">Pending</span></p>
+      </div>
+    </div>
+
+    <!-- Generate Ticket Page -->
+    <div id="generatePage" class="page hidden">
+      <h1>Generate New Ticket</h1>
+      <div class="card">
+        <form onsubmit="event.preventDefault(); submitTicket();">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" required />
+
+          <label for="description">Description</label>
+          <textarea id="description" rows="5" required></textarea>
+
+          <button type="submit">Submit Ticket</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showPage(pageId) {
+      const pages = document.querySelectorAll('.page');
+      pages.forEach(p => p.classList.add('hidden'));
+      document.getElementById(pageId + 'Page').classList.remove('hidden');
+    }
+
+    function submitTicket() {
+      const subject = document.getElementById('subject').value;
+      const description = document.getElementById('description').value;
+
+      alert(`Ticket submitted!\n\nSubject: ${subject}\nDescription: ${description}`);
+      document.getElementById('subject').value = '';
+      document.getElementById('description').value = '';
+      showPage('tickets');
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="dashboard.css">
+  <title>Dashboard</title>
+ 
+</head>
+<body>
+
+  <div class="sidebar">
+    <h2>Dashboard</h2>
+    <a href="#" onclick="showPage('profile')">Profile</a>
+    <a href="#" onclick="showPage('tickets')">Tickets</a>
+    <a href="#" onclick="showPage('generate')">Generate Ticket</a>
+    <div class="logout">
+      <a href="#" onclick="logout()">Log Out</a>
+    </div>
+  </div>
+
+  <div class="content">
+    <!-- Profile Page -->
+    <div id="profilePage" class="page">
+      <h1>Profile</h1>
+      <div class="card">
+        <p><strong>Name:</strong> John Doe</p>
+        <p><strong>Email:</strong> john@example.com</p>
+        <p><strong>Phone:</strong> +1234567890</p>
+      </div>
+    </div>
+
+    <!-- Tickets Page -->
+    <div id="ticketsPage" class="page hidden">
+      <h1>Support Tickets</h1>
+      <div class="card">
+        <p><strong>Ticket #001:</strong> Login issue</p>
+        <p>Status: <span style="color: green;">Resolved</span></p>
+      </div>
+      <div class="card">
+        <p><strong>Ticket #002:</strong> Payment not processed</p>
+        <p>Status: <span style="color: orange;">Pending</span></p>
+      </div>
+    </div>
+
+    <!-- Generate Ticket Page -->
+    <div id="generatePage" class="page hidden">
+      <h1>Generate New Ticket</h1>
+      <div class="card">
+        <form onsubmit="event.preventDefault(); submitTicket();">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" required />
+
+          <label for="description">Description</label>
+          <textarea id="description" rows="5" required></textarea>
+
+          <button type="submit">Submit Ticket</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showPage(pageId) {
+      const pages = document.querySelectorAll('.page');
+      pages.forEach(p => p.classList.add('hidden'));
+      document.getElementById(pageId + 'Page').classList.remove('hidden');
+    }
+
+    function submitTicket() {
+      alert(`Ticket submitted!`);
+      showPage('tickets');
+    }
+
+    function logout() {
+      const confirmLogout = confirm("Are you sure you want to log out?");
+      if (confirmLogout) {
+        alert("You have been logged out.");
+        window.location.href = "../Login_page/login.html"; // Redirect to login page
+      }
+    }
+    window.chtlConfig = { chatbotId: "8829117281" } </script>
+<script async data-id="8829117281" id="chatling-embed-script" type="text/javascript" src="https://chatling.ai/js/embed.js"></script>
+  </script>
+
+</body>
+</html>
